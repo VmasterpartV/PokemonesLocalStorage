@@ -1,0 +1,21 @@
+<form [formGroup]="pokemonForm" class="card p-4">
+    <h3 class="mb-4">Editar Pokémon #{{ pokemon.id }}</h3>
+    <div class="form-group mb-3">
+        <label for="name">Nombre:</label>
+        <input type="text" class="form-control" id="name" formControlName="name">
+        <small *ngIf="pokemonForm.get('name').hasError('required')" class="text-danger">
+            El nombre es obligatorio
+        </small>
+    </div>
+    <div class="col-12 mb-4">
+        <label for="image" class="form-label">Imagen:</label>
+        <input (change)="onFileSelected($event)" type="file" class="form-control" id="image" name="image"
+            accept="image/*" formControlName="image">
+    </div>
+    <figure *ngIf="pokemon">
+        <img [src]="imageUrl" alt="Imagen de {{ pokemon.name }}" class="img-fluid">
+    </figure>
+    <div class="d-flex">
+        <button #btnSubmit type="button" class="btn btn-primary" (click)="onSubmit()">Guardar</button>
+    </div>
+</form>
